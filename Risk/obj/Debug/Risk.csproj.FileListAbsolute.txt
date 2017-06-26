@@ -1,0 +1,5 @@
+c:\users\nanom\documents\visual studio 2013\Projects\Risk\Risk\bin\Debug\Risk.dll
+c:\users\nanom\documents\visual studio 2013\Projects\Risk\Risk\bin\Debug\Risk.pdb
+c:\users\nanom\documents\visual studio 2013\Projects\Risk\Risk\obj\Debug\Risk.csprojResolveAssemblyReference.cache
+c:\users\nanom\documents\visual studio 2013\Projects\Risk\Risk\obj\Debug\Risk.dll
+c:\users\nanom\documents\visual studio 2013\Projects\Risk\Risk\obj\Debug\Risk.pdb

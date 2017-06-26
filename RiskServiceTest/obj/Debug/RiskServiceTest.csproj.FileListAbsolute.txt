@@ -1,0 +1,7 @@
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\bin\Debug\RiskServiceTest.dll
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\bin\Debug\RiskServiceTest.pdb
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\obj\Debug\RiskServiceTest.csprojResolveAssemblyReference.cache
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\obj\Debug\RiskServiceTest.dll
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\obj\Debug\RiskServiceTest.pdb
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\bin\Debug\Risk.dll
+c:\Users\nanom\documents\visual studio 2013\Projects\Risk\RiskServiceTest\bin\Debug\Risk.pdb
