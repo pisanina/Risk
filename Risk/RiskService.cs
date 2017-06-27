@@ -27,51 +27,6 @@ namespace ActiveRiskInterviewTest
             risks.Add(new Risk { Id = 10, Owner = _john, RiskScore = 36, Status = RiskStatus.Approved, Title = "Component fails to meet performance" });
             return risks;
         }
-        public List<Risk> GetRiskByUser(string User)
-        {
-            var Search = GetRisks();
-            var SearchResults = new List<Risk>();
-
-            foreach (var risk in Search)
-            {
-                if (risk.Owner.Name == User)
-                {
-                    SearchResults.Add(risk);
-                }
-            }
-            return SearchResults;
-        }
-
-        public List<Risk> GetRiskWithOtherStatus(RiskStatus Status)
-        {
-            var Search = GetRisks();
-            var SearchResults = new List<Risk>();
-
-            foreach (var risk in Search)
-            {
-                if (risk.Status != Status)
-                {
-                    SearchResults.Add(risk);
-                }
-            }
-            return SearchResults;
-        }
-
-        public List<Risk> GetRiskByTitle(string Title)
-        {
-            if (Title == null) throw new ArgumentNullException("Title cannot be null");
-            var Search = GetRisks();
-            var SearchResults = new List<Risk>();
-
-            foreach (var risk in Search)
-            {
-                if (risk.Title.ToLower().Contains(Title.ToLower()))
-                {
-                    SearchResults.Add(risk);
-                }
-            }
-            return SearchResults;
-        }
     }
 
 
@@ -82,6 +37,18 @@ namespace ActiveRiskInterviewTest
         public Resource Owner { get; set; }
         public RiskStatus Status { get; set; }
         public int RiskScore { get; set; }
+        public Risk Copy()
+        {
+            var a = new Risk();
+
+            a.Id = this.Id;
+            a.Title = this.Title;
+            a.Owner = this.Owner;
+            a.Status = this.Status;
+            a.RiskScore = this.RiskScore;
+
+            return a;
+        }
     }
 
     public class Resource

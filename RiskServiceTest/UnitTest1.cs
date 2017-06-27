@@ -7,38 +7,38 @@ namespace RiskServiceTest
 {
     [TestClass]
 
-   
     public class RiskServiceTest
     {
 
-        RiskService Search;
+        FindRisk Search;
 
 
-        public RiskServiceTest()
+    [TestInitialize]
+        public void Initialize()
         {
-            Search = new RiskService();
+            Search = new FindRisk();
         }
     
    
         [TestMethod]
         public void TestIfNoUser()
         {
- 
-            Assert.AreEqual(0, Search.GetRiskByUser("nazwa").Count);
+            Search.GetRiskByUser("nazwa");
+            Assert.AreEqual(0, Search.ResultsOfSearch().Count);
         }
 
         [TestMethod]
         public void TestIfNullUser()
         {
-           
-            Assert.AreEqual(0, Search.GetRiskByUser(null).Count);
+            Search.GetRiskByUser(null);
+            Assert.AreEqual(0, Search.ResultsOfSearch().Count);
         }
 
         [TestMethod]
         public void TestIfOneUser()
         {
-           
-            var Find = Search.GetRiskByUser("Julian Jelfs");
+            Search.GetRiskByUser("Julian Jelfs");
+            var Find = Search.ResultsOfSearch();
             Assert.AreEqual(1, Find.Count);
             Assert.AreEqual("Julian Jelfs", Find[0].Owner.Name);
         }
@@ -46,33 +46,36 @@ namespace RiskServiceTest
         [TestMethod]
         public void TestIfMoreUser()
         {
-          
-            var Find = Search.GetRiskByUser("Jon Moore");
-            Assert.AreEqual(3, Search.GetRiskByUser("Jon Moore").Count);
+            Search.GetRiskByUser("Jon Moore");
+            var Find = Search.ResultsOfSearch();    
+            Assert.AreEqual(3, Search.ResultsOfSearch().Count);
             Assert.AreEqual("Jon Moore", Find[0].Owner.Name);
             Assert.AreEqual("Jon Moore", Find[1].Owner.Name);
             Assert.AreEqual("Jon Moore", Find[2].Owner.Name);
         }
 
+
         [TestMethod]
         public void TestStatusUnapproved()
         {
-          
-            Assert.AreEqual(8, Search.GetRiskWithOtherStatus(RiskStatus.Unapproved).Count);
+            Search.GetRiskWithOtherStatus(RiskStatus.Unapproved);
+
+            Assert.AreEqual(8, Search.ResultsOfSearch().Count);
         }
 
         [TestMethod]
         public void TestStatusUnapproved1()
         {
-           
-            Assert.AreEqual(7, Search.GetRiskWithOtherStatus(RiskStatus.Approved).Count);
+            Search.GetRiskWithOtherStatus(RiskStatus.Approved);
+
+            Assert.AreEqual(7, Search.ResultsOfSearch().Count);
         }
 
         [TestMethod]
         public void TestIfTitleContains()
         {
-           
-            var Find = Search.GetRiskByTitle("fire");
+            Search.GetRiskByTitle("fire");
+            var Find = Search.ResultsOfSearch();
             Assert.AreEqual(4, Find.Count);
             Assert.IsTrue(Find[0].Title.ToLower().Contains("fire"));
             Assert.IsTrue(Find[1].Title.ToLower().Contains("fire"));
@@ -83,18 +86,46 @@ namespace RiskServiceTest
         [TestMethod]
         public void TestIfTitleContainsNothing()
         {
-           
-            var Find = Search.GetRiskByTitle("");
+            Search.GetRiskByTitle("");
+            var Find = Search.ResultsOfSearch();
             Assert.AreEqual(10, Find.Count);
+        }
+
+        [TestMethod]
+        public void TestIfTitleContainsPlantAndSecondParametrIsEmpty()
+        {
+            Search.GetRiskByUser("Nobody");
+            Search.GetRiskByTitle("Plant");
+            var Find = Search.ResultsOfSearch();
+            Assert.AreEqual(0, Find.Count);
         }
 
         [TestMethod]
         [ExpectedException(typeof(System.ArgumentNullException))]
         public void TestIfTitleContainsNull()
         {
-          
-            var Find = Search.GetRiskByTitle(null);
+            Search.GetRiskByTitle(null);
+            var Find = Search.ResultsOfSearch();
             Assert.AreEqual(0, Find.Count);
+        }
+
+        [TestMethod]
+        public void TestTitleAndUser()
+        {
+            Search.GetRiskByTitle("fire");
+            Search.GetRiskByUser("John Hillhouse");
+            var Find = Search.ResultsOfSearch();
+            Assert.AreEqual(1, Find.Count);
+        }
+
+        [TestMethod]
+        public void TestTitleAndUserAndOtherStatus()
+        {
+            Search.GetRiskByTitle("fire");
+            Search.GetRiskByUser("John Hillhouse");
+            Search.GetRiskWithOtherStatus(RiskStatus.Approved);
+            var Find = Search.ResultsOfSearch();
+            Assert.AreEqual(1, Find.Count);
         }
     }
 }
